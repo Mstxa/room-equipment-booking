@@ -1,0 +1,24 @@
+:root {
+  font-family: "Leelawadee UI", "Noto Sans Thai", "Tahoma", system-ui, sans-serif;
+  line-height: 1.6;
+  color: #142a2d;
+  background: #f0f6f4;
+  color-scheme: light;
+  font-synthesis: none;
+  --ink: #142a2d;
+  --muted: #4e6465;
+  --line: #d5e4df;
+  --primary: #006b59;
+  --primary-hover: #005546;
+  --surface: #fff;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+#root { min-height: 100svh; }
+h1, h2, p { margin: 0; }
+h1, h2 { line-height: 1.35; }
+h1 { font-size: clamp(1.45rem, 3.2vw, 2.35rem); }
+h2 { font-size: 1.25rem; }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 3px solid #168c75; outline-offset: 3px; }
