@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 const bookingStatuses = {
@@ -241,6 +241,14 @@ export default function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [account, setAccount] = useState(null);
   const [bookings, setBookings] = useState([]);
+  const [currentTime, setCurrentTime] = useState(() => Date.now());
+
+  useEffect(() => {
+    if (!account) return;
+
+    const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, [account]);
   const [resources, setResources] = useState([]);
   const [resourceId, setResourceId] = useState("");
   const [date, setDate] = useState("");
@@ -315,6 +323,7 @@ export default function App() {
         request("/resources"),
       ]);
 
+      setCurrentTime(Date.now());
       setAccount({ ...user, token: access_token });
       setBookings(items);
       setResources(resourceList);
@@ -616,7 +625,7 @@ export default function App() {
                         <td>
                           <div className="booking-actions">
                             {["requested", "confirmed"].includes(booking.status) &&
-                              new Date(booking.start_at).getTime() > Date.now() && (
+                              new Date(booking.start_at).getTime() > currentTime && (
                                 <>
                                   <button
                                     type="button"

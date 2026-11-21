@@ -36,12 +36,13 @@ def validate_booking_time(start_at: datetime, end_at: datetime) -> None:
 def insert_booking(conn, user_id, resource_id, start_at, end_at) -> dict:
     validate_booking_time(start_at, end_at)
 
+    # Serialize writers for this resource until the transaction completes.
     resource = conn.execute(
         """
         SELECT id
         FROM resources
         WHERE id = %s AND is_active = TRUE
-        FOR SHARE
+        FOR NO KEY UPDATE
         """,
         (resource_id,),
     ).fetchone()
@@ -203,11 +204,12 @@ def update_booking_in_transaction(
 
     validate_booking_time(new_start_at, new_end_at)
 
+    # Serialize writers for this resource until the transaction completes.
     resource = conn.execute(
         """
         SELECT id FROM resources
         WHERE id = %s AND is_active = TRUE
-        FOR SHARE
+        FOR NO KEY UPDATE
         """,
         (new_resource_id,),
     ).fetchone()

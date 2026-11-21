@@ -233,14 +233,20 @@ The database is stored in the named `booking-data` volume and persists across co
 
 ## Submission status and trade-offs
 
-The selected additional feature is the repeatable evaluation harness above.
+The selected additional feature is the repeatable evaluation harness.
 
-Observed checks include the existing integration tests (3/3 on the user's running system), six additional rule/redaction unit tests (6/6 locally), Mock evaluation (8/8), registration/login with a new account, and assistant edit/cancellation through the UI. The final source cleanup removes four identical duplicate cancellation definitions, preserving the executable behavior of the retained definition. The Mock score is limited to its fixed evaluation requests.
+Verified on a local Git clone:
+- Backend tests passed, 9/9.
+- Mock evaluation passed, 8/8.
+- Frontend lint passed.
+- Frontend production build passed.
 
-Still pending before final submission:
+Concurrent booking testing exposed a PostgreSQL deadlock. Resource locks
+were changed to FOR NO KEY UPDATE to serialize writes for the same
+resource. The combined backend tests passed after this fix.
+This approach trades per-resource write concurrency for simpler locking.
 
-- Rerun the combined nine tests after installing the final source update.
-- Run the documented setup from a clean checkout with a separate database volume.
-- Run live OpenAI requests once API credit is available.
-
-The Compose setup runs the Vite development server, binds application ports to localhost, and contains development database credentials. It is intended for local exercise review. Public deployment would need its own deployment and operational configuration.
+The assistant's Mock mode supports predefined Thai and English templates.
+Its evaluation score does not measure live model performance or accuracy
+on arbitrary wording. Live OpenAI testing remains pending because the API
+account had insufficient credit.
