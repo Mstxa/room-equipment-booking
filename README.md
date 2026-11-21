@@ -147,7 +147,9 @@ The key stays in the backend environment. Keep `.env` out of Git.
 
 The model request has a 15-second HTTP timeout. Request/network failures and unsuccessful provider responses produce a service-unavailable message directing users to the form. Incomplete or malformed provider output is rejected. Manual booking remains independently available.
 
-Live OpenAI operation remains unverified after the API account returned insufficient-credit errors.
+Live OpenAI integration is implemented, but end-to-end verification remains
+pending because I could not add a payment card to enable API billing.
+Mock mode is available for review without an API key.
 
 ## Guardrails and logging
 
@@ -252,5 +254,5 @@ This approach trades per-resource write concurrency for simpler locking.
 
 The assistant's Mock mode supports predefined Thai and English templates.
 Its evaluation score does not measure live model performance or accuracy
-on arbitrary wording. Live OpenAI testing remains pending because the API
-account had insufficient credit.
+on arbitrary wording. Live OpenAI testing remains pending because I could
+not add a payment card to enable API billing.
