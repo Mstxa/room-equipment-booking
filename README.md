@@ -213,7 +213,9 @@ returning no tool call is the expected result.
 The Mock uses predefined patterns. Passing these cases does not establish
 accuracy on unseen wording or live LLM performance. Database availability,
 booking conflicts, ownership, and confirmation are outside this harness's
-scope. Live OpenAI evaluation remains pending due to Live OpenAI integration is implemented, but end-to-end verification remains
+scope.
+
+Live OpenAI integration is implemented, but end-to-end verification remains
 pending because I could not add a payment card to enable API billing.
 Mock mode is available for review without an API key.
 
