@@ -185,7 +185,7 @@ Run both test files after installing the final update:
 docker compose exec -T -w /app backend python -m unittest discover -s tests -p "test_booking*.py" -v
 ```
 
-Expect nine tests. The combined run against the running application is still pending after the final update.
+The combined nine-test suite passed on a local Git clone after the final update.
 
 ## Natural-language evaluation
 
